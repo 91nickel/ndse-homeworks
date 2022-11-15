@@ -1,0 +1,78 @@
+root@vagrant:/home/vagrant/node# docker pull busybox:latest
+latest: Pulling from library/busybox
+Digest: sha256:f7ca5a32c10d51aeda3b4d01c61c6061f497893d7f6628b92f822f7117182a57
+Status: Image is up to date for busybox:latest
+docker.io/library/busybox:latest
+
+root@vagrant:/home/vagrant/node# docker run --name pinger busybox:latest ping -c 7 netology.ru
+PING netology.ru (104.22.48.171): 56 data bytes
+64 bytes from 104.22.48.171: seq=0 ttl=54 time=2.882 ms
+64 bytes from 104.22.48.171: seq=1 ttl=54 time=3.036 ms
+64 bytes from 104.22.48.171: seq=2 ttl=54 time=6.436 ms
+64 bytes from 104.22.48.171: seq=3 ttl=54 time=4.510 ms
+64 bytes from 104.22.48.171: seq=4 ttl=54 time=2.611 ms
+64 bytes from 104.22.48.171: seq=5 ttl=54 time=2.935 ms
+64 bytes from 104.22.48.171: seq=6 ttl=54 time=3.182 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 2.611/3.656/6.436 ms
+
+root@vagrant:/home/vagrant/node# docker ps -a
+CONTAINER ID   IMAGE                                                  COMMAND                  CREATED          STATUS                       PORTS                                                      NAMES
+edef2fd192b1   busybox:latest                                         "ping -c 7 netology.…"   25 seconds ago   Exited (0) 17 seconds ago                                                               pinger
+
+root@vagrant:/home/vagrant/node# docker logs pinger
+PING netology.ru (104.22.48.171): 56 data bytes
+64 bytes from 104.22.48.171: seq=0 ttl=54 time=2.882 ms
+64 bytes from 104.22.48.171: seq=1 ttl=54 time=3.036 ms
+64 bytes from 104.22.48.171: seq=2 ttl=54 time=6.436 ms
+64 bytes from 104.22.48.171: seq=3 ttl=54 time=4.510 ms
+64 bytes from 104.22.48.171: seq=4 ttl=54 time=2.611 ms
+64 bytes from 104.22.48.171: seq=5 ttl=54 time=2.935 ms
+64 bytes from 104.22.48.171: seq=6 ttl=54 time=3.182 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 2.611/3.656/6.436 ms
+
+root@vagrant:/home/vagrant/node# docker start pinger
+pinger
+
+root@vagrant:/home/vagrant/node# docker logs pinger
+PING netology.ru (104.22.48.171): 56 data bytes
+64 bytes from 104.22.48.171: seq=0 ttl=54 time=3.373 ms
+64 bytes from 104.22.48.171: seq=1 ttl=54 time=2.990 ms
+64 bytes from 104.22.48.171: seq=2 ttl=54 time=3.028 ms
+64 bytes from 104.22.48.171: seq=3 ttl=54 time=2.841 ms
+64 bytes from 104.22.48.171: seq=4 ttl=54 time=2.924 ms
+64 bytes from 104.22.48.171: seq=5 ttl=54 time=2.919 ms
+64 bytes from 104.22.48.171: seq=6 ttl=54 time=3.007 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 2.841/3.011/3.373 ms
+PING netology.ru (104.22.49.171): 56 data bytes
+64 bytes from 104.22.49.171: seq=0 ttl=54 time=3.512 ms
+64 bytes from 104.22.49.171: seq=1 ttl=54 time=3.272 ms
+64 bytes from 104.22.49.171: seq=2 ttl=54 time=3.280 ms
+64 bytes from 104.22.49.171: seq=3 ttl=54 time=2.981 ms
+64 bytes from 104.22.49.171: seq=4 ttl=54 time=2.590 ms
+64 bytes from 104.22.49.171: seq=5 ttl=54 time=2.771 ms
+64 bytes from 104.22.49.171: seq=6 ttl=54 time=2.885 ms
+
+--- netology.ru ping statistics ---
+7 packets transmitted, 7 packets received, 0% packet loss
+round-trip min/avg/max = 2.590/3.041/3.512 ms
+PING netology.ru (104.22.49.171): 56 data bytes
+
+root@vagrant:/home/vagrant/node# запусков очевидно было 14
+
+root@vagrant:/home/vagrant/node# docker rm pinger
+pinger
+
+root@vagrant:/home/vagrant/node# docker rmi busybox:latest
+Untagged: busybox:latest
+Untagged: busybox@sha256:f7ca5a32c10d51aeda3b4d01c61c6061f497893d7f6628b92f822f7117182a57
+Deleted: sha256:16ea53ea7c652456803632d67517b78a4f9075a10bfdc4fc6b7b4cbf2bc98497
+Deleted: sha256:cfd97936a58000adc09a9f87adeeb7628a2c71d11c4998e6e7f26935fa0cd713

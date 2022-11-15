@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+    pinger:
+      container_name: pinger
+      image: busybox:latest
+      environment:
+        NAME: Nikita
+        SURNAME: Kuznetsov
+      command: 'ping -c 7 netology.ru'
+
+    first_node:
+      container_name: first_node
+      build: ./docker/node
+      environment:
+        TZ: Europe/Moscow
+        NAME: Nikita
+        SURNAME: Kuznetsov
+      command: 'echo Привет $NAME $SURNAME ! && sleep 1h'
+      volumes:
+        - ./data:/var/first/data
+      ports:
+        - 29999:3000
+
+    second_node:
+      container_name: second_node
+      build: ./docker/node
+      environment:
+        TZ: Europe/Moscow
+      command: 'sleep 1h'
+      volumes:
+        - ./data:/var/second/data
+      ports:
+        - 29999:3000

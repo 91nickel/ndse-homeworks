@@ -1,11 +1,11 @@
-# Домашнее задание к занятию «2.6 Подключение MongoDB в Node.js приложение»
+# Домашнее задание к занятию «2.7 Подключение MongoDB в Node.js приложение»
 
 **Правила выполнения домашней работы:** 
 * Выполняйте домашнее задание в отдельной ветке проекта на гитхабе.
 * В поле для сдачи работы прикрепите ссылку на ваш проект в Git.
 * Присылать на проверку можно каждую задачу по отдельности или все задачи вместе. 
 * Во время проверки по частям ваша домашняя работа будет со статусом «На доработке».
-* Любые вопросы по решению задач задавайте в чате учебной группы.
+* Любые вопросы по решению задач задавайте в Slack.
 
 
 #### Задание 1
@@ -42,6 +42,38 @@
 `PUT` | `/api/books/:id` | редактировать книгу по **id** |  редактируем объект книги, если запись не найдено вернем **Code: 404**
 `DELETE` | `/api/books/:id` | удалить книгу по **id** | удаляем книгу и возвращаем ответ: **'ok'**
 
+## Решение
+
+https://github.com/91nickel/netology-books
+
+Потрогать руками можно на http://test.foroffice.ru:29999/books
+
+Тестировать API
+
+Все книги:
+``` console
+curl test.foroffice.ru:29999/api/books
+```
+Одна книга:
+``` console
+curl test.foroffice.ru:29999/api/books/616de2b89c48aac7d9811895
+```
+Новая книга:
+``` console
+curl -X POST test.foroffice.ru:29999/api/books \
+-H"Content-Type: application/json" \
+-d'{"title":"New Test Book", "description":"New Test Book description"}'
+```
+Обновление книги:
+``` console
+curl -X PUT test.foroffice.ru:29999/api/books/616de2b89c48aac7d9811895 \
+-H"Content-Type: application/json" \
+-d'{"title":"Test Update Book", "description":"Test Update Book description"}'
+```
+Удаление книги:
+``` console
+curl -X DELETE test.foroffice.ru:29999/api/books/<ID>
+```
 
 
 
